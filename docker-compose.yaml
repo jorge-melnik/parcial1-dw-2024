@@ -14,10 +14,13 @@ services:
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
   front:
-    image: nginx:alpine
+    image: front
     container_name: front
+    build:
+      context: ./front
+    command: sh -c "npm install && npm start"
     volumes:
-      - ./front/:/usr/share/nginx/html
+      - ./front/:/front
   base:
     image: base
     container_name: base
