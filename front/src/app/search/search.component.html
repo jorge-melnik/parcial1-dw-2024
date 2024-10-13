@@ -1,0 +1,9 @@
+<form (ngSubmit)="this.onClick($event)">
+  <input
+    name="valor"
+    type="text"
+    placeholder="Filter by nombre"
+    [(ngModel)]="this.valor"
+  />
+  <button class="primary" type="submit">Buscar</button>
+</form>

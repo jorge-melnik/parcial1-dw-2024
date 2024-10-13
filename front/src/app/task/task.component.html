@@ -1,0 +1,19 @@
+<p>task Control Flow Statement"</p>
+@if (this.task()) {
+  <p>{{ this.task() | json }}</p>
+} @else {
+  <p>No se obtuvieron resultados.</p>
+}
+
+
+<br>
+
+<p>task doble ngiF</p>
+<p *ngIf="this.task()">{{ this.task() | json }}</p>
+<p *ngIf="!this.task()">No se obtuvieron resultados.</p>
+
+<br>
+
+<p>task ngIf else</p>
+<p *ngIf="this.task(); else noTask">{{ this.task() | json }}</p>
+<ng-template #noTask><p>No se obtuvieron resultados.</p></ng-template>
