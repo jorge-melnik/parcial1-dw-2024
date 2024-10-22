@@ -9,6 +9,12 @@ import { JsonPipe } from '@angular/common';
   imports: [FormsModule, JsonPipe],
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.css',
+  // providers: [
+  //   {
+  //     provide: NG_VALIDATORS,
+  //     useExisting: DivisorDirective,
+  //   },
+  // ],
 })
 export class TaskFormComponent {
   public task: TaskPost = { duracion: 0, nombre: '' };
