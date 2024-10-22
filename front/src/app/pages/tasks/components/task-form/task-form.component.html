@@ -1,0 +1,102 @@
+<p>task-form works!</p>
+<div class="task-form-container">
+  <h2>Crear Tarea</h2>
+  <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input
+        type="text"
+        id="nombre"
+        [(ngModel)]="task.nombre"
+        name="nombre"
+        required
+        minlength="4"
+      />
+      <ul>
+        <li>Value: {{ taskForm.form.controls["nombre"].value | json }}</li>
+        <li>Status: {{ taskForm.form.controls["nombre"].status | json }}</li>
+        <li>Dirty: {{ taskForm.form.controls["nombre"].dirty | json }}</li>
+        <li>Touched: {{ taskForm.form.controls["nombre"].touched | json }}</li>
+        <li>
+          UnTouched: {{ taskForm.form.controls["nombre"].untouched | json }}
+        </li>
+        <li>
+          Pristine: {{ taskForm.form.controls["nombre"].pristine | json }}
+        </li>
+        <li>Pending: {{ taskForm.form.controls["nombre"].pending | json }}</li>
+        <li>Valid: {{ taskForm.form.controls["nombre"].valid | json }}</li>
+        <li>Invalid: {{ taskForm.form.controls["nombre"].invalid | json }}</li>
+        <li>Errorrs: {{ taskForm.form.controls["nombre"].errors | json }}</li>
+        <li>
+          hasError(required) :
+          {{ taskForm.form.controls["nombre"].hasError("required") | json }}
+        </li>
+        <li>
+          hasError(minlength) :
+          {{ taskForm.form.controls["nombre"].hasError("minlength") | json }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <label for="duracion">Duración (minutos):</label>
+      <input
+        type="number"
+        id="duracion"
+        [(ngModel)]="task.duracion"
+        name="duracion"
+        required
+        min="1"
+        max="8"
+      />
+
+      <ul>
+        <li>Value: {{ taskForm.form.controls["duracion"].value | json }}</li>
+        <li>Status: {{ taskForm.form.controls["duracion"].status | json }}</li>
+        <li>Dirty: {{ taskForm.form.controls["duracion"].dirty | json }}</li>
+        <li>
+          Touched: {{ taskForm.form.controls["duracion"].touched | json }}
+        </li>
+        <li>
+          UnTouched: {{ taskForm.form.controls["duracion"].untouched | json }}
+        </li>
+        <li>
+          Pristine: {{ taskForm.form.controls["duracion"].pristine | json }}
+        </li>
+        <li>
+          Pending: {{ taskForm.form.controls["duracion"].pending | json }}
+        </li>
+        <li>Valid: {{ taskForm.form.controls["duracion"].valid | json }}</li>
+        <li>
+          Invalid: {{ taskForm.form.controls["duracion"].invalid | json }}
+        </li>
+        <li>Errorrs: {{ taskForm.form.controls["duracion"].errors | json }}</li>
+        <li>
+          hasError(required) :
+          {{ taskForm.form.controls["duracion"].hasError("required") | json }}
+        </li>
+        <li>
+          hasError(min) :
+          {{ taskForm.form.controls["duracion"].hasError("min") | json }}
+        </li>
+        <li>
+          hasError(max) :
+          {{ taskForm.form.controls["duracion"].hasError("max") | json }}
+        </li>
+      </ul>
+    </div>
+    <button type="submit">Crear Tarea</button>
+
+    <ul>
+      <li>Value: {{ taskForm.form.value | json }}</li>
+      <li>Status: {{ taskForm.form.status | json }}</li>
+      <li>Dirty: {{ taskForm.form.dirty | json }}</li>
+      <li>Touched: {{ taskForm.form.touched | json }}</li>
+      <li>UnTouched: {{ taskForm.form.untouched | json }}</li>
+      <li>Pristine: {{ taskForm.form.pristine | json }}</li>
+      <li>Pending: {{ taskForm.form.pending | json }}</li>
+      <li>Valid: {{ taskForm.form.valid | json }}</li>
+      <li>Invalid: {{ taskForm.form.invalid | json }}</li>
+      <li>Errorrs: {{ taskForm.errors | json }}</li>
+    </ul>
+  </form>
+</div>
