@@ -12,6 +12,7 @@
         required
         minlength="4"
         #nombre="ngModel"
+        appTaken="hola"
       />
       @if (nombre.control && taskForm.form.controls["nombre"]) {
         <ul>
@@ -56,6 +57,7 @@
         required
         min="1"
         max="8"
+        appDivisor="3"
       />
 
       @if (taskForm.form.controls["duracion"]) {
