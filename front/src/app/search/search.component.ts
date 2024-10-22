@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -9,16 +9,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './search.component.css',
 })
 export class SearchComponent {
-  @Output()
-  onValorChange = new EventEmitter<string>();
+  filter = output<string>();
 
-  valor: string = '';
-  i: number = 0;
-  public onClick(evento: MouseEvent) {
-    console.log('Valor actual: ' + this.valor);
+  valor = '';
 
-    this.onValorChange.emit(this.valor);
-    this.valor = 'Click ' + this.i++;
-    console.log(this.valor);
+  public onClick() {
+    this.filter.emit(this.valor);
   }
 }

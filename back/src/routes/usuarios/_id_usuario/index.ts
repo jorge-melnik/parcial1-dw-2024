@@ -3,8 +3,7 @@ import { FastifyPluginAsync } from "fastify";
 import {
   IdUsuarioSchema,
   IdUsuarioType,
-  UsuarioSchema,
-  UsuarioType,
+  Usuario,
 } from "../../../types/usuario.js";
 import * as usuarioService from "../../../services/usuarios.js";
 
@@ -28,7 +27,7 @@ const usuariosRoutes: FastifyPluginAsync = async (
           description: "Usuario encontrado. ",
           content: {
             "application/json": {
-              schema: UsuarioSchema,
+              schema: Usuario,
             },
           },
         },
@@ -80,14 +79,14 @@ const usuariosRoutes: FastifyPluginAsync = async (
         "- response. \n " +
         "- que el usuario que ejecuta es administrador o el mismo usuario a modificar.",
 
-      body: UsuarioSchema,
+      body: Usuario,
       params: IdUsuarioSchema,
       response: {
         200: {
           description: "Usuario actualizado.",
           content: {
             "application/json": {
-              schema: UsuarioSchema,
+              schema: Usuario,
             },
           },
         },
@@ -95,7 +94,7 @@ const usuariosRoutes: FastifyPluginAsync = async (
     },
     onRequest: [fastify.verifyJWT, fastify.verifySelfOrAdmin],
     handler: async function (request, reply) {
-      const usuario = request.body as UsuarioType;
+      const usuario = request.body as Usuario;
       return usuarioService.updateById(usuario);
     },
   });

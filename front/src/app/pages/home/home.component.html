@@ -1,0 +1,12 @@
+<section>
+  <app-search (filter)="this.valorRecibido($event)"></app-search>
+</section>
+<br />
+<section>
+  <app-task [task]="this.task"></app-task>
+</section>
+<section>
+  <a [routerLink]="['/tasks']" routerLinkActive="router-link-active"
+    >Listado Tareas</a
+  >
+</section>

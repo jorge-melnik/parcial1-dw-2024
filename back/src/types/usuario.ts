@@ -19,7 +19,7 @@ export const LoginSchema = Type.Object(
 );
 export type LoginType = Static<typeof LoginSchema>;
 
-export const UsuarioSchema = Type.Object(
+export const Usuario = Type.Object(
   {
     id_usuario: Type.Integer({
       description: "Identificador único del usuario",
@@ -76,5 +76,5 @@ export const NuevoUsuarioSchema = Type.Object(
   }
 );
 
-export type UsuarioType = Static<typeof UsuarioSchema>;
+export type Usuario = Static<typeof Usuario>;
 export type NuevoUsuarioType = Static<typeof NuevoUsuarioSchema>;
