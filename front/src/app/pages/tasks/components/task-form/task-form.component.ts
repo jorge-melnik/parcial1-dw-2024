@@ -1,9 +1,9 @@
 import { Component, output } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { TaskPost } from '../../../../interfaces/tasks';
 import { JsonPipe } from '@angular/common';
-import { TakenDirective } from '../../../../directivas/taken.directive';
-import { DivisorDirective } from '../../../../directivas/divisor.directive';
+import { DivisorDirective } from '../../../../core/directivas/divisor.directive';
+import { TakenDirective } from '../../../../core/directivas/taken.directive';
+import { TaskPost } from '../../../../shared/interfaces/tasks';
 
 @Component({
   selector: 'app-task-form',
@@ -17,8 +17,6 @@ export class TaskFormComponent {
   public save = output<TaskPost>();
 
   public onSubmit(taskForm: NgForm) {
-    console.log({ taskForm });
-    console.log('TASK: ', { task: this.task });
     taskForm.form.markAllAsTouched();
 
     if (taskForm.valid) {

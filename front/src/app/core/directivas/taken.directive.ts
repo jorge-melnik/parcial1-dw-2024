@@ -1,10 +1,11 @@
-import { Directive, forwardRef, Input } from '@angular/core';
+import { Directive, forwardRef, inject } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidator,
   NG_ASYNC_VALIDATORS,
   ValidationErrors,
 } from '@angular/forms';
+import { ApiService } from '../../shared/servicios/api.service';
 
 @Directive({
   selector: '[appTaken]',
@@ -18,15 +19,12 @@ import {
   ],
 })
 export class TakenDirective implements AsyncValidator {
-  @Input('appTaken')
-  taken = '1';
-
+  _apiService = inject(ApiService);
   async validate(control: AbstractControl): Promise<ValidationErrors | null> {
-    console.log('VALIDATE: ', control.value);
-    return { taken: true };
-  }
-
-  registerOnValidatorChange?(fn: () => void): void {
-    console.log('FN: ', fn);
+    const valor = control.value;
+    if (valor === 'pedro') {
+      return { taken: true };
+    }
+    return null;
   }
 }

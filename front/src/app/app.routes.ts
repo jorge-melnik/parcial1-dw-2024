@@ -1,24 +1,24 @@
 import { Routes } from '@angular/router';
-import { LoginPageComponent } from './auth/login/login.page';
-import { logueadoGuard } from './guards/logueado.guard';
-import { HomeComponent } from './pages/home/home.component';
 import { TasksComponent } from './pages/tasks/task-list/tasks.component';
 // import { TaskDetailComponent } from './pages/tasks/task-detail/task-detail.component';
 import { TaskCreatePageComponent } from './pages/tasks/task-create/task-create.page';
+import { HomePageComponent } from './pages/home/home.page';
+import { logueadoGuard } from './core/guards/logueado.guard';
+import { LoginPageComponent } from './pages/auth/login/login.page';
+import { TaskDetailComponent } from './pages/tasks/task-detail/task-detail.component';
 
 export const routes: Routes = [
-  { path: '', component: HomeComponent, title: 'Home page' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
     path: 'home',
-    component: HomeComponent,
+    component: HomePageComponent,
     title: 'Home page',
-    canActivate: [logueadoGuard],
   },
   { path: 'auth/login', component: LoginPageComponent, title: 'Login' },
 
   {
     path: 'tasks',
-    // canActivate: [logueadoGuard],
+    canActivate: [logueadoGuard],
     children: [
       {
         path: '',
@@ -31,12 +31,12 @@ export const routes: Routes = [
         title: 'Crear tarea',
         pathMatch: 'full',
       },
-      // {
-      //   path: ':id_tarea',
-      //   component: TaskDetailComponent,
-      //   title: 'Detalle tarea',
-      //   pathMatch: 'full',
-      // },
+      {
+        path: ':id_tarea',
+        component: TaskDetailComponent,
+        title: 'Detalle tarea',
+        pathMatch: 'full',
+      },
     ],
   },
 ];

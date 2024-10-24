@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { TasksService } from '../../../servicios/tasks.service';
-import { Task } from '../../../interfaces/tasks';
 import { JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { TasksService } from '../../../shared/servicios/tasks.service';
+import { Task } from '../../../shared/interfaces/tasks';
 
 @Component({
   selector: 'app-tasks',
