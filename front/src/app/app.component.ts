@@ -11,11 +11,10 @@ import { JsonPipe } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   private _authService = inject(AuthService);
-  public usuario?: Usuario;
 
-  async ngOnInit() {
-    this.usuario = this._authService.user;
+  get usuario() {
+    return this._authService.usuario;
   }
 }
