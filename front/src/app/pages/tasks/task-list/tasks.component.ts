@@ -17,6 +17,7 @@ export class TasksComponent implements OnInit {
   public taskList = signal<Task[]>([]);
 
   async ngOnInit(): Promise<void> {
+    console.log('TasksComponent ON INIT');
     const listado = await this._taskService.getAllTasks();
     this.taskList.set(listado);
   }
