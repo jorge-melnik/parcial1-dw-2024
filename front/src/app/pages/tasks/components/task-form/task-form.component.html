@@ -1,119 +1,58 @@
-<p>task-form works!</p>
-<div class="task-form-container">
-  <h2>Crear Tarea</h2>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Card Title</ion-card-title>
+    <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+  </ion-card-header>
   <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
-    <div>
-      <label for="nombre">Nombre:</label>
-      <input
-        type="text"
-        id="nombre"
-        [(ngModel)]="task.nombre"
-        name="nombre"
-        required
-        minlength="4"
-        #nombre="ngModel"
-        appTaken
-      />
-      @if (nombre.control && taskForm.form.controls["nombre"]) {
-        <ul>
-          <li>Value: {{ nombre.control.value | json }}</li>
-          <li>Status: {{ taskForm.form.controls["nombre"].status | json }}</li>
-          <li>Dirty: {{ taskForm.form.controls["nombre"].dirty | json }}</li>
-          <li>
-            Touched: {{ taskForm.form.controls["nombre"].touched | json }}
-          </li>
-          <li>
-            UnTouched: {{ taskForm.form.controls["nombre"].untouched | json }}
-          </li>
-          <li>
-            Pristine: {{ taskForm.form.controls["nombre"].pristine | json }}
-          </li>
-          <li>
-            Pending: {{ taskForm.form.controls["nombre"].pending | json }}
-          </li>
-          <li>Valid: {{ taskForm.form.controls["nombre"].valid | json }}</li>
-          <li>
-            Invalid: {{ taskForm.form.controls["nombre"].invalid | json }}
-          </li>
-          <li>Errorrs: {{ taskForm.form.controls["nombre"].errors | json }}</li>
-          <li>
-            hasError(required) :
-            {{ taskForm.form.controls["nombre"].hasError("required") | json }}
-          </li>
-          <li>
-            hasError(minlength) :
-            {{ taskForm.form.controls["nombre"].hasError("minlength") | json }}
-          </li>
-        </ul>
-      }
-    </div>
-    <div>
-      <label for="duracion">Duración (minutos):</label>
-      <input
-        type="number"
-        id="duracion"
-        [(ngModel)]="task.duracion"
-        name="duracion"
-        required
-        min="1"
-        max="8"
-        [appDivisor]="3"
-      />
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-input
+            type="text"
+            label-placement="floating"
+            fill="outline"
+            name="nombre"
+            placeholder="Ingresa el nombre de la tarea."
+            ngModel
+            required
+            minlength="4"
+            #nombre="ngModel"
+            appTaken
+            [errorText]="nombre.errors | json"
+          />
+        </ion-item>
+        <ion-item>
+          <ion-input
+            type="number"
+            fill="outline"
+            label-placement="floating"
+            placeholder="Ingresa la duración en minutos."
+            ngModel
+            name="duracion"
+            required
+            min="1"
+            max="8"
+            #duracion="ngModel"
+            [appDivisor]="3"
+            [errorText]="duracion.errors | json"
+          />
+        </ion-item>
+      </ion-list>
 
-      @if (taskForm.form.controls["duracion"]) {
-        <ul>
-          <li>Value: {{ taskForm.form.controls["duracion"].value | json }}</li>
-          <li>
-            Status: {{ taskForm.form.controls["duracion"].status | json }}
-          </li>
-          <li>Dirty: {{ taskForm.form.controls["duracion"].dirty | json }}</li>
-          <li>
-            Touched: {{ taskForm.form.controls["duracion"].touched | json }}
-          </li>
-          <li>
-            UnTouched: {{ taskForm.form.controls["duracion"].untouched | json }}
-          </li>
-          <li>
-            Pristine: {{ taskForm.form.controls["duracion"].pristine | json }}
-          </li>
-          <li>
-            Pending: {{ taskForm.form.controls["duracion"].pending | json }}
-          </li>
-          <li>Valid: {{ taskForm.form.controls["duracion"].valid | json }}</li>
-          <li>
-            Invalid: {{ taskForm.form.controls["duracion"].invalid | json }}
-          </li>
-          <li>
-            Errorrs: {{ taskForm.form.controls["duracion"].errors | json }}
-          </li>
-          <li>
-            hasError(required) :
-            {{ taskForm.form.controls["duracion"].hasError("required") | json }}
-          </li>
-          <li>
-            hasError(min) :
-            {{ taskForm.form.controls["duracion"].hasError("min") | json }}
-          </li>
-          <li>
-            hasError(max) :
-            {{ taskForm.form.controls["duracion"].hasError("max") | json }}
-          </li>
-        </ul>
-      }
-    </div>
-    <button type="submit">Crear Tarea</button>
-
-    <ul>
-      <li>Value: {{ taskForm.form.value | json }}</li>
-      <li>Status: {{ taskForm.form.status | json }}</li>
-      <li>Dirty: {{ taskForm.form.dirty | json }}</li>
-      <li>Touched: {{ taskForm.form.touched | json }}</li>
-      <li>UnTouched: {{ taskForm.form.untouched | json }}</li>
-      <li>Pristine: {{ taskForm.form.pristine | json }}</li>
-      <li>Pending: {{ taskForm.form.pending | json }}</li>
-      <li>Valid: {{ taskForm.form.valid | json }}</li>
-      <li>Invalid: {{ taskForm.form.invalid | json }}</li>
-      <li>Errorrs: {{ taskForm.errors | json }}</li>
-    </ul>
+      <ion-button type="submit">Crear Tarea</ion-button>
+      <!-- 
+        <ion-list>
+          <ion-item>Value: {{ taskForm.form.value | json }}</ion-item>
+          <ion-item>Status: {{ taskForm.form.status | json }}</ion-item>
+          <ion-item>Dirty: {{ taskForm.form.dirty | json }}</ion-item>
+          <ion-item>Touched: {{ taskForm.form.touched | json }}</ion-item>
+          <ion-item>UnTouched: {{ taskForm.form.untouched | json }}</ion-item>
+          <ion-item>Pristine: {{ taskForm.form.pristine | json }}</ion-item>
+          <ion-item>Pending: {{ taskForm.form.pending | json }}</ion-item>
+          <ion-item>Valid: {{ taskForm.form.valid | json }}</ion-item>
+          <ion-item>Invalid: {{ taskForm.form.invalid | json }}</ion-item>
+          <ion-item>Errorrs: {{ taskForm.errors | json }}</ion-item>
+        </ul> -->
+    </ion-card-content>
   </form>
-</div>
+</ion-card>

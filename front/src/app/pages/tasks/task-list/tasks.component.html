@@ -1,13 +1,11 @@
-<p>tasks works!</p>
-<button type="button" [routerLink]="['/tasks', 'crear']">CREAR TAREA</button>
-@for (task of this.taskList(); track task.id_tarea) {
-  <div>
-    <ul>
-      <li>Nombre: {{ task.nombre }}</li>
-      <li>Creador: {{ task.creador }}</li>
-      <li>Duracion: {{ task.duracion }}</li>
-      <li>Usuario asginados: {{ task.usuarios | json }}</li>
-    </ul>
-  </div>
-  <br />
-}
+<ion-content>
+  @for (task of this.taskList(); track task.id_tarea) {
+    <app-task-card [task]="task"></app-task-card>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button [routerLink]="['/tasks', 'crear']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

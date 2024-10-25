@@ -8,18 +8,26 @@ import {
   IonCardTitle,
   IonCardSubtitle,
   IonCardContent,
+  IonContent,
+  IonInput,
+  IonInputPasswordToggle,
+  IonButton,
 } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+    IonButton,
+    IonInput,
+    IonContent,
     IonCardContent,
     IonCardSubtitle,
     IonCardTitle,
     IonCardHeader,
     FormsModule,
     IonCard,
+    IonInputPasswordToggle,
   ],
   templateUrl: './login.page.html',
   styleUrl: './login.page.css',

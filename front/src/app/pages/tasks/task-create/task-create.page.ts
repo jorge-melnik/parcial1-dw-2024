@@ -3,11 +3,12 @@ import { TaskFormComponent } from '../components/task-form/task-form.component';
 import { TasksService } from '../../../shared/servicios/tasks.service';
 import { Task, TaskPost } from '../../../shared/interfaces/tasks';
 import { Router } from '@angular/router';
+import { IonContent } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-task-create',
   standalone: true,
-  imports: [TaskFormComponent],
+  imports: [IonContent, TaskFormComponent],
   templateUrl: './task-create.page.html',
   styleUrl: './task-create.page.css',
 })

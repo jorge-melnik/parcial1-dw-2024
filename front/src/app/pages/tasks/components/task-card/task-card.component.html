@@ -1,0 +1,15 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title
+      >{{ this.task().id_tarea }}: {{ this.task().nombre }}
+    </ion-card-title>
+    <ion-card-subtitle> {{ this.task().duracion }} minutos.</ion-card-subtitle>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list>
+      <ion-item>Usuarios: {{ this.task().usuarios | json }}</ion-item>
+      <ion-item>Creador: {{ this.task().creador | json }} </ion-item>
+    </ion-list>
+  </ion-card-content>
+</ion-card>

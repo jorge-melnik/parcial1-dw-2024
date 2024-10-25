@@ -1,7 +1,8 @@
-<main>
-  <p>App component anda</p>
-  <p>Usuario: {{ this.usuario() | json }}</p>
-  <section class="content">
-    <router-outlet></router-outlet>
-  </section>
-</main>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Usuario: {{ this.usuario() | json }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-router-outlet></ion-router-outlet>
+</ion-content>

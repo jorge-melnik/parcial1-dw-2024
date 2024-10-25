@@ -3,11 +3,28 @@ import { JsonPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TasksService } from '../../../shared/servicios/tasks.service';
 import { Task } from '../../../shared/interfaces/tasks';
+import { TaskCardComponent } from '../components/task-card/task-card.component';
+import {
+  IonContent,
+  IonFabButton,
+  IonFab,
+  IonIcon,
+  IonButton,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [JsonPipe, RouterLink],
+  imports: [
+    IonButton,
+    IonIcon,
+    IonFab,
+    IonFabButton,
+    IonContent,
+    JsonPipe,
+    RouterLink,
+    TaskCardComponent,
+  ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })

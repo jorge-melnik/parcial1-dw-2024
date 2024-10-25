@@ -1,6 +1,6 @@
 import {
   ApplicationConfig,
-  provideExperimentalZonelessChangeDetection,
+  provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 
@@ -11,9 +11,10 @@ import { provideIonicAngular } from '@ionic/angular/standalone';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    // provideZoneChangeDetection({ eventCoalescing: true }),
-    provideExperimentalZonelessChangeDetection(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    // provideExperimentalZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient(withInterceptors([tokenInterceptor])), provideIonicAngular({}),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideIonicAngular({}),
   ],
 };
