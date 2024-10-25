@@ -8,16 +8,19 @@ import {
   IonTitle,
   IonHeader,
   IonToolbar,
+  IonFooter,
 } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    IonFooter,
     IonToolbar,
     IonHeader,
     IonTitle,
     IonContent,
+    IonFooter,
     IonRouterOutlet,
     RouterModule,
     JsonPipe,

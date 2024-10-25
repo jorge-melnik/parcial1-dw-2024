@@ -11,6 +11,8 @@ import {
   IonIcon,
   IonButton,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { add } from 'ionicons/icons';
 
 @Component({
   selector: 'app-tasks',
@@ -29,6 +31,9 @@ import {
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent implements OnInit {
+  constructor() {
+    addIcons({ add });
+  }
   private _taskService = inject(TasksService);
 
   public taskList = signal<Task[]>([]);

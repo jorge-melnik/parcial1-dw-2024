@@ -7,6 +7,7 @@ import {
   IonCardContent,
   IonList,
   IonItem,
+  IonContent,
 } from '@ionic/angular/standalone';
 import { Task } from '../../../../shared/interfaces/tasks';
 import { JsonPipe } from '@angular/common';
@@ -15,6 +16,7 @@ import { JsonPipe } from '@angular/common';
   selector: 'app-task-card',
   standalone: true,
   imports: [
+    IonContent,
     IonItem,
     IonList,
     IonCardContent,
@@ -23,6 +25,7 @@ import { JsonPipe } from '@angular/common';
     IonCardHeader,
     IonCard,
     JsonPipe,
+    IonContent,
   ],
   templateUrl: './task-card.component.html',
   styleUrl: './task-card.component.css',
