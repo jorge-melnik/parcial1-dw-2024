@@ -20,6 +20,8 @@ export class ErrorMessagePipe implements PipeTransform {
     if (errors['largo']) return 'El largo no es correcto';
     if (errors['valueMatchWith'])
       return `El valor debe ser igual a ${errors['valueMatchWith'].field2Name}.`;
+    if (errors['freeEmail'])
+      return `El email ${errors['freeEmail'].actualValue} ya ha sido utilizado.`;
     return 'El valor no es correcto.';
   }
 }

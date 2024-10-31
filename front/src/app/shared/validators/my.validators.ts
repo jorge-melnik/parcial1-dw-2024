@@ -1,5 +1,6 @@
 import {
   AbstractControl,
+  AsyncValidatorFn,
   FormGroup,
   ValidationErrors,
   ValidatorFn,
@@ -54,6 +55,19 @@ export function valuesMatch(
         valuesMatch: {
           field1Name,
           field2Name,
+        },
+      };
+    return null;
+  };
+}
+
+export function freeEmail(): AsyncValidatorFn {
+  return async (control: AbstractControl): Promise<ValidationErrors | null> => {
+    const email = control.value;
+    if (email === 'j@j.com')
+      return {
+        freeEmail: {
+          actualValue: email,
         },
       };
     return null;

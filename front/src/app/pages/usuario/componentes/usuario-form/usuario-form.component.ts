@@ -1,4 +1,4 @@
-import { Component, OnInit, output } from '@angular/core';
+import { Component, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -18,7 +18,10 @@ import {
 } from '@ionic/angular/standalone';
 import { ErrorMessagePipe } from '../../../../shared/pipes/error-message.pipe';
 import { UsuarioPost } from '../../../../shared/interfaces/usuario';
-import { valueMatchWith } from '../../../../shared/validators/my.validators';
+import {
+  freeEmail,
+  valueMatchWith,
+} from '../../../../shared/validators/my.validators';
 
 @Component({
   selector: 'app-usuario-form',
@@ -41,31 +44,36 @@ import { valueMatchWith } from '../../../../shared/validators/my.validators';
 })
 export class UsuarioFormComponent {
   public usuarioForm: FormGroup;
-
   public created = output<UsuarioPost>();
 
   constructor() {
     this.usuarioForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-      ]),
-      contraseña: new FormControl('', [
-        Validators.required,
-        valueMatchWith('contraseña2'),
-      ]),
-      contraseña2: new FormControl('', [
-        Validators.required,
-        valueMatchWith('contraseña'),
-      ]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      email2: new FormControl('', [
-        Validators.required,
-        Validators.email,
-        valueMatchWith('email'),
-      ]),
-      is_admin: new FormControl(false),
-      image: new FormControl('', Validators.required),
+      username: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required, Validators.minLength(3)],
+      }),
+      contraseña: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required],
+      }),
+      contraseña2: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required, valueMatchWith('contraseña')],
+      }),
+      email: new FormControl('', {
+        updateOn: 'blur',
+        validators: [Validators.required, Validators.email],
+        asyncValidators: [freeEmail()],
+      }),
+      email2: new FormControl('', {
+        updateOn: 'blur',
+        validators: [
+          Validators.required,
+          Validators.email,
+          valueMatchWith('email'),
+        ],
+        asyncValidators: [freeEmail()],
+      }),
     });
   }
 

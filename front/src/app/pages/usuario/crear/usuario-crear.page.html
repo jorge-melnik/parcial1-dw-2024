@@ -1,1 +1,9 @@
-<app-usuario-form></app-usuario-form>
+<ion-grid>
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col>
+      <app-usuario-form (created)="this.onCreated($event)"></app-usuario-form>
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+</ion-grid>
