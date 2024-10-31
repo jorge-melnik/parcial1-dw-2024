@@ -1,1 +1,50 @@
-<p>{{ this.usuario() | json }}</p>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <input
+                type="file"
+                (change)="fileChangeEvent($event)"
+                #fileInput
+                hidden
+              />
+              <ion-button fill="none" (click)="fileInput.click()">
+                <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+                Selecciona una imagen
+              </ion-button>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 3"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded($event)"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+              [resizeToWidth]="480"
+              [resizeToHeight]="360"
+              [onlyScaleDown]="true"
+              [autoCrop]="true"
+            ></image-cropper>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Así quedará:</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="croppedImage" alt="imagne" />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
