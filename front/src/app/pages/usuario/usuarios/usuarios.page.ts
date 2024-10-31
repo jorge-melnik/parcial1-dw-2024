@@ -21,6 +21,10 @@ import {
 import { Usuario } from '../../../shared/interfaces/usuario';
 import { UsuarioService } from '../../../shared/servicios/usuario.service';
 import { RouterLink } from '@angular/router';
+import { IonIcon } from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { camera } from 'ionicons/icons';
 
 @Component({
   selector: 'app-listado',
@@ -44,6 +48,7 @@ import { RouterLink } from '@angular/router';
     IonCol,
     IonButton,
     RouterLink,
+    IonIcon,
   ],
   templateUrl: './usuario.page.html',
   styleUrl: './usuario.page.css',
@@ -51,6 +56,10 @@ import { RouterLink } from '@angular/router';
 export class UsuariosPageComponent implements OnInit {
   private _usuariosService = inject(UsuarioService);
   public usuarios: Usuario[] = [];
+
+  constructor() {
+    addIcons({ camera });
+  }
 
   async ngOnInit() {
     this.usuarios = await this._usuariosService.getAllUsuarios();

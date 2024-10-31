@@ -8,6 +8,7 @@ import { LoginPageComponent } from './pages/auth/login/login.page';
 import { TaskDetailComponent } from './pages/tasks/task-detail/task-detail.component';
 import { UsuariosPageComponent } from './pages/usuario/usuarios/usuarios.page';
 import { UsuarioCrearPageComponent } from './pages/usuario/crear/usuario-crear.page';
+import { UsuarioImagenComponent } from './pages/usuario/usuario-imagen/usuario-imagen.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -54,6 +55,12 @@ export const routes: Routes = [
         path: 'crear',
         component: UsuarioCrearPageComponent,
         title: 'Crear Usuario',
+        pathMatch: 'full',
+      },
+      {
+        path: 'imagen',
+        component: UsuarioImagenComponent,
+        title: 'Cambiar imagen',
         pathMatch: 'full',
       },
     ],

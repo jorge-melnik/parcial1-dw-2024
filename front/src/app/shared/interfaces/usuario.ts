@@ -7,9 +7,8 @@ export interface UsuarioPost {
 
 export interface Usuario {
   id_usuario: number;
-  image_url: string;
-
   username: string;
   email: string;
   is_admin: boolean;
+  image_url: string;
 }
