@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from "fastify";
 import { FastifyInstance } from "fastify/types/instance.js";
-import { join } from "path";
+import { extname, join } from "path";
 import { writeFileSync } from "fs";
 import { IdUsuarioType, ImagenUsuario } from "../../../../types/usuario.js";
 
@@ -15,24 +15,24 @@ const rutasImagenUsuario: FastifyPluginAsync = async (
       const body = request.body as ImagenUsuario;
       const params = request.params as IdUsuarioType;
       const fileBuffer = body.imagen._buf as Buffer;
-      const filename = join(
+      const extension = extname(body.imagen.filename);
+      const filename = params.id_usuario + extension;
+      console.log(body.imagen);
+      const destinoArchivo = join(
         process.cwd(),
         "public",
         "img",
         "usuarios",
-        params.id_usuario + ".png"
+        filename
       );
-      writeFileSync(filename, fileBuffer);
+      writeFileSync(destinoArchivo, fileBuffer);
       const urlUsuario =
-        "http://localhost/back/public/img/usuarios/" +
-        params.id_usuario +
-        ".png";
+        "http://localhost/back/public/img/usuarios/" + filename;
       const usuario = await usuarioService.updateImageUrlById(
         params.id_usuario,
         urlUsuario
       );
-      console.log({ usuario });
-      return;
+      return usuario;
     },
   });
 };

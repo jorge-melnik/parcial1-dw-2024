@@ -29,7 +29,7 @@ export class UsuarioService {
 
   async uploadImage(id_usuario: number, image: Blob): Promise<Usuario> {
     const formData = new FormData();
-    formData.append('imagen', image, 'image.png');
+    formData.append('imagen', image, 'image.webp');
     return firstValueFrom(
       this._httpClient.put<Usuario>(
         this.baseUrl + id_usuario + '/imagen',

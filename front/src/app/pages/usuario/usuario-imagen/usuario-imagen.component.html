@@ -26,7 +26,7 @@
               [imageChangedEvent]="imageChangedEvent"
               [maintainAspectRatio]="true"
               [aspectRatio]="4 / 3"
-              format="png"
+              format="webp"
               (imageCropped)="imageCropped($event)"
               (imageLoaded)="imageLoaded($event)"
               (cropperReady)="cropperReady()"
@@ -45,7 +45,7 @@
             <ion-card-title>Así quedará:</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <img [src]="croppedImage" alt="imagne" />
+            <img [src]="croppedImage" alt="imagen" />
           </ion-card-content>
         </ion-card>
       </ion-col>
