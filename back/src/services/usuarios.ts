@@ -24,6 +24,20 @@ export const deleteById = async (id_usuario: number) => {
   if (res.rowCount === 0) throw new NotFoundError("");
 };
 
+export const updateImageUrlById = async (id_usuario: number, url: string) => {
+  const res = await db.query(
+    `
+    UPDATE public.usuarios  
+    SET image_url=$2
+    WHERE id_usuario=$1
+    RETURNING *;
+    `,
+    [id_usuario, url]
+  );
+  if (res.rowCount === 0) throw new NotFoundError("");
+  return res.rows[0];
+};
+
 export const updateById = async (usuario: Usuario) => {
   const res = await db.query(
     `

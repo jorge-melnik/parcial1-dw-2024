@@ -58,7 +58,7 @@ export const routes: Routes = [
         pathMatch: 'full',
       },
       {
-        path: 'imagen',
+        path: 'imagen/:id_usuario',
         component: UsuarioImagenComponent,
         title: 'Cambiar imagen',
         pathMatch: 'full',

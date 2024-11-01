@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, OnInit } from '@angular/core';
 import { Usuario } from '../../../shared/interfaces/usuario';
 import { JsonPipe } from '@angular/common';
 import {
@@ -24,7 +24,9 @@ import {
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { cloudUploadOutline } from 'ionicons/icons';
+import { cloudUploadOutline, saveOutline } from 'ionicons/icons';
+import { UsuarioService } from '../../../shared/servicios/usuario.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-imagen',
@@ -49,14 +51,19 @@ import { cloudUploadOutline } from 'ionicons/icons';
   templateUrl: './usuario-imagen.component.html',
   styleUrl: './usuario-imagen.component.css',
 })
-export class UsuarioImagenComponent {
-  public usuario = input.required<Usuario>();
-
+export class UsuarioImagenComponent implements OnInit {
+  private _usuarioService = inject(UsuarioService);
+  private _imageBlob: Blob | null | undefined = undefined;
+  private _router = inject(Router);
+  public id_usuario = input.required<string>();
   imageChangedEvent: Event | null = null;
   croppedImage: SafeUrl = '';
 
   constructor(private sanitizer: DomSanitizer) {
-    addIcons({ cloudUploadOutline });
+    addIcons({ cloudUploadOutline, saveOutline });
+  }
+  ngOnInit(): void {
+    console.log({ id_usuario: this.id_usuario() });
   }
 
   fileChangeEvent(event: Event): void {
@@ -67,7 +74,10 @@ export class UsuarioImagenComponent {
     console.log('imageCropped');
     if (!event.objectUrl) return;
     this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
+    console.log({ cropped: this.croppedImage });
     // event.blob can be used to upload the cropped image
+    this._imageBlob = event.blob;
+    console.log({ blob: this._imageBlob });
   }
   imageLoaded(image: LoadedImage) {
     // show cropper
@@ -80,5 +90,19 @@ export class UsuarioImagenComponent {
   loadImageFailed() {
     // show message
     console.log('loadImageFailed');
+  }
+  async save() {
+    console.log('save');
+    try {
+      if (!this._imageBlob) return;
+      await this._usuarioService.uploadImage(
+        parseInt(this.id_usuario()),
+        this._imageBlob,
+      );
+      this._imageBlob = null;
+      this._router.navigate(['usuarios']);
+    } catch (error: any) {
+      console.error(error);
+    }
   }
 }

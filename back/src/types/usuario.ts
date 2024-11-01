@@ -29,6 +29,7 @@ export const Usuario = Type.Object(
     is_admin: Type.Boolean({
       description: "Indica si el usuario es administrador",
     }),
+    image_url: Type.Optional(Type.String()),
   },
   {
     additionalProperties: false,
@@ -78,3 +79,23 @@ export const NuevoUsuarioSchema = Type.Object(
 
 export type Usuario = Static<typeof Usuario>;
 export type NuevoUsuarioType = Static<typeof NuevoUsuarioSchema>;
+
+export const ImagenUsuarioSchema = Type.Object(
+  {
+    imagen: Type.Object(
+      {
+        type: Type.Literal("file"),
+        fieldname: Type.String(),
+        filename: Type.String(),
+        encoding: Type.String(),
+        mimetype: Type.String(),
+        file: Type.Object({}), // Para manejar el FileStream
+        _buf: Type.Object({}),
+      },
+      { additionalProperties: false }
+    ),
+  },
+  { additionalProperties: false }
+);
+
+export type ImagenUsuario = Static<typeof ImagenUsuarioSchema>;

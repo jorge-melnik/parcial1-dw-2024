@@ -19,14 +19,11 @@
       <ion-col>
         <ion-card>
           <div style="position: relative">
-            <img
-              alt="Silhouette of mountains"
-              src="https://ionicframework.com/docs/img/demos/card-media.png"
-            />
+            <img alt="{{usuario.image_url}}" [src]="usuario.image_url" />
             <ion-button
               fill="clear"
               style="position: absolute; top: 10px; right: 10px"
-              [routerLink]="['/usuarios/imagen']"
+              [routerLink]="['/usuarios/imagen', usuario.id_usuario]"
             >
               <ion-icon name="camera"></ion-icon>
             </ion-button>

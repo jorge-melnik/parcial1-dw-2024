@@ -50,8 +50,8 @@ import { camera } from 'ionicons/icons';
     RouterLink,
     IonIcon,
   ],
-  templateUrl: './usuario.page.html',
-  styleUrl: './usuario.page.css',
+  templateUrl: './usuarios.page.html',
+  styleUrl: './usuarios.page.css',
 })
 export class UsuariosPageComponent implements OnInit {
   private _usuariosService = inject(UsuarioService);

@@ -5,7 +5,8 @@ CREATE TABLE usuarios (
     username TEXT NOT NULL UNIQUE,
     email TEXT NOT NULL UNIQUE,
     contraseña TEXT NOT NULL,
-    is_admin BOOLEAN NOT NULL DEFAULT false
+    is_admin BOOLEAN NOT NULL DEFAULT false,
+    image_url TEXT
 );
 
 INSERT INTO public.usuarios (username,email,contraseña,is_admin) VALUES('admin', 'admin@parcial.com', crypt('@Admin1', gen_salt('bf')), true);

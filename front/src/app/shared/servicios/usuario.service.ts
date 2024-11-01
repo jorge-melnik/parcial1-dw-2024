@@ -26,4 +26,15 @@ export class UsuarioService {
   async createUsuario(task: UsuarioPost): Promise<Usuario> {
     return firstValueFrom(this._httpClient.post<Usuario>(this.baseUrl, task));
   }
+
+  async uploadImage(id_usuario: number, image: Blob): Promise<Usuario> {
+    const formData = new FormData();
+    formData.append('imagen', image, 'image.png');
+    return firstValueFrom(
+      this._httpClient.put<Usuario>(
+        this.baseUrl + id_usuario + '/imagen',
+        formData,
+      ),
+    );
+  }
 }
