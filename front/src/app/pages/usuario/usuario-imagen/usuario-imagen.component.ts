@@ -1,5 +1,4 @@
 import { Component, inject, input, OnInit } from '@angular/core';
-import { Usuario } from '../../../shared/interfaces/usuario';
 import { JsonPipe } from '@angular/common';
 import {
   ImageCropperComponent,
@@ -56,6 +55,7 @@ export class UsuarioImagenComponent implements OnInit {
   private _imageBlob: Blob | null | undefined = undefined;
   private _router = inject(Router);
   public id_usuario = input.required<string>();
+
   imageChangedEvent: Event | null = null;
   croppedImage: SafeUrl = '';
 
@@ -70,6 +70,7 @@ export class UsuarioImagenComponent implements OnInit {
     console.log('fileChangeEvent');
     this.imageChangedEvent = event;
   }
+  
   imageCropped(event: ImageCroppedEvent) {
     console.log('imageCropped');
     if (!event.objectUrl) return;

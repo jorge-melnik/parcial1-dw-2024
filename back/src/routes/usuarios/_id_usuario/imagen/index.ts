@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from "fastify";
 import { FastifyInstance } from "fastify/types/instance.js";
-import { extname, join } from "path";
+import { extname, join } from "node:path";
 import { writeFileSync } from "fs";
 import { IdUsuarioType, ImagenUsuario } from "../../../../types/usuario.js";
 
