@@ -13,6 +13,8 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
+    ports:
+      - 3000:3000
   front:
     image: front
     container_name: front
@@ -37,8 +39,10 @@ services:
     container_name: proxy
     volumes:
       - ./proxy/myconf.template:/etc/nginx/templates/default.conf.template
+      - ./proxy/certs:/etc/nginx/certs
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - front
       - back

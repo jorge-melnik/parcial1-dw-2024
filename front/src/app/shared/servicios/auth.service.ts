@@ -33,18 +33,28 @@ export class AuthService {
 
   public async loadToken() {
     const token = localStorage.getItem(TOKEN_KEY);
-    if (token) {
-      this._token = token;
-      const responseUsuario = await firstValueFrom(
-        this._httpClient.get<Usuario>(this._baseUrl),
-      );
-      this.usuario.set(responseUsuario);
+    console.log({ token });
+    try {
+      if (token) {
+        this._token = token;
+        const responseUsuario = await firstValueFrom(
+          this._httpClient.get<Usuario>(this._baseUrl),
+        );
+        this.usuario.set(responseUsuario);
+      }
+      this.tokenLoadFinish = true;
+    } catch (error: unknown) {
+      console.error('El token del local storage no era válido.');
     }
-    this.tokenLoadFinish = true;
   }
 
   get token(): string | undefined {
     return this._token;
+  }
+
+  async doLogout() {
+    this._token = '';
+    localStorage.clear();
   }
 
   async doLogin(username: string, contraseña: string) {

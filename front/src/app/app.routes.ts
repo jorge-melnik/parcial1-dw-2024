@@ -21,7 +21,7 @@ export const routes: Routes = [
 
   {
     path: 'tasks',
-    canActivate: [logueadoGuard],
+    canActivateChild: [logueadoGuard],
     children: [
       {
         path: '',
@@ -44,7 +44,7 @@ export const routes: Routes = [
   },
   {
     path: 'usuarios',
-    canActivate: [logueadoGuard],
+    canActivateChild: [logueadoGuard],
     children: [
       {
         path: '',

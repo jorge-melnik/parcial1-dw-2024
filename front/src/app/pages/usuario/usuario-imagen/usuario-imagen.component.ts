@@ -20,17 +20,29 @@ import {
   IonCol,
   IonContent,
   IonLabel,
+  IonImg,
 } from '@ionic/angular/standalone';
 
 import { addIcons } from 'ionicons';
-import { cloudUploadOutline, saveOutline } from 'ionicons/icons';
+import {
+  cloudUploadOutline,
+  phonePortraitOutline,
+  saveOutline,
+} from 'ionicons/icons';
 import { UsuarioService } from '../../../shared/servicios/usuario.service';
 import { Router } from '@angular/router';
+import {
+  Camera,
+  CameraResultType,
+  CameraSource,
+  Photo,
+} from '@capacitor/camera';
 
 @Component({
   selector: 'app-usuario-imagen',
   standalone: true,
   imports: [
+    IonImg,
     IonLabel,
     IonContent,
     IonCol,
@@ -70,7 +82,7 @@ export class UsuarioImagenComponent implements OnInit {
     console.log('fileChangeEvent');
     this.imageChangedEvent = event;
   }
-  
+
   imageCropped(event: ImageCroppedEvent) {
     console.log('imageCropped');
     if (!event.objectUrl) return;
@@ -104,6 +116,21 @@ export class UsuarioImagenComponent implements OnInit {
       this._router.navigate(['usuarios']);
     } catch (error: any) {
       console.error(error);
+    }
+  }
+
+  public foto?: string;
+  async takePhoto() {
+    const foto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100,
+    });
+    if (foto.webPath) {
+      this.foto = foto.webPath;
+      console.log('Webpath: ' + foto.webPath);
+    } else {
+      console.log('No hay foto.');
     }
   }
 }

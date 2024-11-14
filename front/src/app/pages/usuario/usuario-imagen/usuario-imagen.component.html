@@ -50,5 +50,18 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="none" (click)="takePhoto()">
+          <ion-icon slot="start" name="save-outline"></ion-icon>
+          Sacar foto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-img [src]="this.foto"></ion-img>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
