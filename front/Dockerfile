@@ -1,10 +1,10 @@
 FROM node:22
-
+#https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes?hl=es-419
 ARG JAVA_VERSION=17
 ARG ANDROID_SDK_VERSION=11076708
-ARG ANDROID_BUILD_TOOLS_VERSION=34.0.0
-ARG ANDROID_PLATFORMS_VERSION=34
-ARG GRADLE_VERSION=8.2.1
+ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
+ARG ANDROID_PLATFORMS_VERSION=30
+ARG GRADLE_VERSION=8.0
 
 RUN npm install -g @angular/cli @ionic/cli @capacitor/cli
 RUN apt-get update -q
