@@ -65,6 +65,7 @@ import {
 export class UsuarioImagenComponent implements OnInit {
   private _usuarioService = inject(UsuarioService);
   private _imageBlob: Blob | null | undefined = undefined;
+  public imageBase64?: string;
   private _router = inject(Router);
   public id_usuario = input.required<string>();
 
@@ -122,15 +123,25 @@ export class UsuarioImagenComponent implements OnInit {
   public foto?: string;
   async takePhoto() {
     const foto = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
+      resultType: CameraResultType.Base64,
       source: CameraSource.Camera,
       quality: 100,
     });
-    if (foto.webPath) {
+    if (foto.base64String) {
       this.foto = foto.webPath;
       console.log('Webpath: ' + foto.webPath);
+      // const myBlob = await this.convertToBlob(foto.webPath);
+      // this._imageBlob = myBlob;
+      this.imageBase64 = foto.base64String;
+      console.log({ image: this.imageBase64 });
     } else {
       console.log('No hay foto.');
     }
+  }
+
+  private async convertToBlob(url: string): Promise<Blob> {
+    const response = await fetch(url);
+    const myBlob = response.blob();
+    return myBlob;
   }
 }
