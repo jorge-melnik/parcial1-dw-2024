@@ -2,14 +2,9 @@
   "name": "front",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng run front:serve --host=0.0.0.0",
-    "build": "ng build",
-    "gradle": "cd android && ./gradlew assembleDebug",
-    "ionic": "ionic serve",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint"
+    "start": "ionic serve --external --port=4200 --project=front",
+    "build": "ionic build --prod --project=front",
+    "gradle": "npm run build && npx cap sync && cd android && ./gradlew assembleDebug"
   },
   "private": true,
   "dependencies": {

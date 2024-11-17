@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +7,11 @@ import { Injectable } from '@angular/core';
 export class UrlService {
   private _backUrl = '';
   constructor() {
-    this._backUrl = window.location.origin + '/back/';
+    let base = window.location.origin;
+    if (environment.hostUrl) {
+      base = environment.hostUrl;
+    }
+    this._backUrl = base + '/back/';
   }
 
   get backUrl() {

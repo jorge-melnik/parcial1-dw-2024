@@ -20,6 +20,7 @@ services:
     container_name: front
     build:
       context: ./front
+    # tty: true
     command: sh -c "npm install && npm start"
     volumes:
       - ./front/:/front

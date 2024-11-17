@@ -17,6 +17,7 @@ import {
   IonCol,
   IonLabel,
 } from '@ionic/angular/standalone';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -64,7 +65,11 @@ export class LoginPageComponent {
         this._router.navigate(['/home']);
       }
     } catch (error: any) {
-      console.error(error.message);
+      if (error instanceof HttpErrorResponse) {
+        this.errorMessage.set(error.error.message);
+        console.error(error.error);
+      }
+      console.error(error);
       this.errorMessage.set(error.message);
     }
   }
