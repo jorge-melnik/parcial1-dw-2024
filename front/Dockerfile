@@ -3,8 +3,10 @@ FROM node:22
 ARG JAVA_VERSION=17
 ARG ANDROID_SDK_VERSION=11076708
 ARG ANDROID_BUILD_TOOLS_VERSION=30.0.3
-ARG ANDROID_PLATFORMS_VERSION=30
-ARG GRADLE_VERSION=8.0
+ARG ANDROID_PLATFORMS_VERSION=31
+# ARG GRADLE_VERSION=8.0.2
+ARG ANDROID_HOME=/opt/android-sdk
+ENV ANDROID_HOME=${ANDROID_HOME}
 
 RUN npm install -g @angular/cli @ionic/cli @capacitor/cli
 RUN apt-get update -q
@@ -24,15 +26,15 @@ RUN apt-get install -qy \
     openjdk-${JAVA_VERSION}-jdk
 
 # GRADLE
-ENV GRADLE_HOME=/opt/gradle
-RUN mkdir $GRADLE_HOME \
-    && curl -sL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-${GRADLE_VERSION}-bin.zip \
-    && unzip -d $GRADLE_HOME gradle-${GRADLE_VERSION}-bin.zip
-ENV PATH=$PATH:/opt/gradle/gradle-${GRADLE_VERSION}/bin
+# ENV GRADLE_HOME=/opt/gradle
+# RUN mkdir $GRADLE_HOME \
+#     && curl -sL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-${GRADLE_VERSION}-bin.zip \
+#     && unzip -d $GRADLE_HOME gradle-${GRADLE_VERSION}-bin.zip
+# ENV PATH=$PATH:/opt/gradle/gradle-${GRADLE_VERSION}/bin
 
-# Install Android SDK tools
-ENV ANDROID_HOME=/opt/android-sdk
-RUN curl -sL https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip -o commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip \
+# Android SDK tools
+RUN curl -sL https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip \
+    -o commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip \
     && unzip commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip \
     && mkdir $ANDROID_HOME && mv cmdline-tools $ANDROID_HOME \
     && yes | $ANDROID_HOME/cmdline-tools/bin/sdkmanager --sdk_root=$ANDROID_HOME --licenses \
@@ -44,6 +46,7 @@ RUN apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/*
+RUN chown -R 1000:1000 ${ANDROID_HOME}
 USER node:node
 EXPOSE 4200
 WORKDIR /front
