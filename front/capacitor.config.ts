@@ -5,9 +5,12 @@ const config: CapacitorConfig = {
   appName: 'front',
   webDir: 'dist/front/browser',
   server: {
-    url: 'https://192.168.1.101',
+    // url: 'https://192.168.1.101',
     androidScheme: 'https',
     allowNavigation: ['192.168.1.101'],
+  },
+  android: {
+    allowMixedContent: true, //mezclar http y https
   },
 };
 

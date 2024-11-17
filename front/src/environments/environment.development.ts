@@ -1,3 +1,3 @@
 export const environment = {
-  hostUrl: undefined,
+  hostUrl: 'https://192.168.1.101',
 };

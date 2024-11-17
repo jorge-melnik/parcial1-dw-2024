@@ -26,8 +26,12 @@ const rutasImagenUsuario: FastifyPluginAsync = async (
         filename
       );
       writeFileSync(destinoArchivo, fileBuffer);
-      const urlUsuario =
-        "http://localhost/back/public/img/usuarios/" + filename;
+      console.log({
+        host: request.host,
+        hostname: request.hostname,
+        headers: request.headers,
+      });
+      const urlUsuario = `https://${request.hostname}/back/public/img/usuarios/${filename}`;
       const usuario = await usuarioService.updateImageUrlById(
         params.id_usuario,
         urlUsuario
