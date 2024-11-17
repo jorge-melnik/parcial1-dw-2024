@@ -10,6 +10,10 @@ import {
   IonToolbar,
   IonFooter,
   IonLabel,
+  IonRow,
+  IonCol,
+  IonGrid,
+  IonApp,
 } from '@ionic/angular/standalone';
 import { UrlService } from './shared/servicios/url.service';
 
@@ -17,6 +21,10 @@ import { UrlService } from './shared/servicios/url.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    IonApp,
+    IonGrid,
+    IonCol,
+    IonRow,
     IonLabel,
     IonFooter,
     IonToolbar,
@@ -25,6 +33,7 @@ import { UrlService } from './shared/servicios/url.service';
     IonContent,
     IonFooter,
     IonRouterOutlet,
+    IonApp,
     RouterModule,
     JsonPipe,
   ],

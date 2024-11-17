@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "start": "ionic serve --external --port=4200 --project=front",
-    "build": "ionic build --prod --project=front",
+    "build": "ionic build --project=front",
     "gradle": "npm run build && npx cap sync && cd android && ./gradlew assembleDebug"
   },
   "private": true,
