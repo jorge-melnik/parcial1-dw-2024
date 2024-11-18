@@ -1,33 +1,24 @@
 name: caso2
 services:
   back:
-    image: back
+    image: ${REGISTRY_URL}/back
     container_name: back
     build:
       context: ./back
-      target: development
-    command: sh -c "npm install && npm run dev"
-    volumes:
-      - ./back:/back
+      target: production
     environment:
       - PGDATABASE=${PGDATABASE}
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
-    ports:
-      - 3000:3000
   front:
-    image: front
+    image: ${REGISTRY_URL}/front
     container_name: front
     build:
       context: ./front
-      target: development
-    # tty: true
-    command: sh -c "npm install && npm start"
-    volumes:
-      - ./front/:/front
+      target: production
   base:
-    image: base
+    image: ${REGISTRY_URL}/base
     container_name: base
     build:
       context: ./base
@@ -35,13 +26,13 @@ services:
       - POSTGRES_DB=${PGDATABASE}
       - POSTGRES_USER=${PGUSER}
       - POSTGRES_PASSWORD=${PGPASSWORD}
-    ports:
-      - 5432:5432
   proxy:
     image: nginx:alpine
     container_name: proxy
+    environment:
+      - FRONT_URL=${FRONT_URL}
     volumes:
-      - ./proxy/myconf.template:/etc/nginx/templates/default.conf.template
+      - ./proxy/myconf.production.template:/etc/nginx/templates/default.conf.template
       - ./proxy/certs:/etc/nginx/certs
     ports:
       - 80:80

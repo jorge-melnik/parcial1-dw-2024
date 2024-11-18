@@ -1,4 +1,4 @@
-FROM node:22
+FROM node:22 AS development
 #https://developer.android.com/build/releases/past-releases/agp-8-0-0-release-notes?hl=es-419
 ARG JAVA_VERSION=17
 ARG ANDROID_SDK_VERSION=11076708
@@ -50,3 +50,20 @@ RUN chown -R 1000:1000 ${ANDROID_HOME}
 USER node:node
 EXPOSE 4200
 WORKDIR /front
+
+#build stage
+FROM development as build
+COPY --chown=1000:1000 ./package*.json /front
+RUN npm install
+COPY --chown=1000:1000 . /front
+RUN npm run gradle
+# run gradle ya ejecuta run build
+
+# production stage
+FROM nginx:alpine as production
+COPY --from=build /front/dist/front/browser /usr/share/nginx/html
+COPY --from=build /front/android/app/build/outputs/apk/debug/app-debug.apk /usr/share/nginx/html/app/app-debug.apk
+WORKDIR /usr/share/nginx/html
+COPY nginx.default.conf.template /etc/nginx/templates/default.conf.template
+
+CMD ["nginx", "-g", "daemon off;"]
