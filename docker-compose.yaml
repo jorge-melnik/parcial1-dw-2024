@@ -14,16 +14,16 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
-    ports:
-      - 3000:3000
+      - FRONT_URL=${FRONT_URL}
   front:
     image: front
     container_name: front
     build:
       context: ./front
       target: development
-    # tty: true
     command: sh -c "npm install && npm start"
+    environment:
+      - FRONT_URL=${FRONT_URL}
     volumes:
       - ./front/:/front
   base:
@@ -40,6 +40,8 @@ services:
   proxy:
     image: nginx:alpine
     container_name: proxy
+    environment:
+      - FRONT_URL=${FRONT_URL}
     volumes:
       - ./proxy/myconf.template:/etc/nginx/templates/default.conf.template
       - ./proxy/certs:/etc/nginx/certs

@@ -3,9 +3,6 @@ services:
   back:
     image: ${REGISTRY_URL}/${NOMBRE_GRUPO}/${NOMBRE_PROYECTO}/back
     container_name: back
-    build:
-      context: ./back
-      target: production
     environment:
       - PGDATABASE=${PGDATABASE}
       - PGUSER=${PGUSER}
@@ -15,18 +12,9 @@ services:
   front:
     image: ${REGISTRY_URL}/${NOMBRE_GRUPO}/${NOMBRE_PROYECTO}/front
     container_name: front
-    build:
-      context: ./front
-      target: production
-      args:
-        - FRONT_URL=${FRONT_URL}
-    environment:
-      - FRONT_URL=${FRONT_URL}
   base:
     image: ${REGISTRY_URL}/${NOMBRE_GRUPO}/${NOMBRE_PROYECTO}/base
     container_name: base
-    build:
-      context: ./base
     environment:
       - POSTGRES_DB=${PGDATABASE}
       - POSTGRES_USER=${PGUSER}

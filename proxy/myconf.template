@@ -7,6 +7,7 @@ server {
 
 server {
     listen       443 ssl;
+    listen       [::]:443;
     server_name  ${FRONT_URL};
 
     ssl_certificate /etc/nginx/certs/ucu.crt;

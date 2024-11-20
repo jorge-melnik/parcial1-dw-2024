@@ -4,19 +4,18 @@ WORKDIR /back
 RUN chown -R node:node /back
 USER node:node
 
-FROM node:22-alpine AS development
+FROM base AS development
 EXPOSE 3000
-CMD [ "npm","start" ]
 
 # Stage para hacer build
-FROM base as build
+FROM base AS build
 USER node:node
 COPY --chown=1000:1000 package.json .
-RUN npm install
+RUN npm install 
 COPY --chown=1000:1000 . .
 RUN npm run build:ts
 
-FROM base as production
+FROM base AS production
 COPY --chown=1000:1000 --from=build /back/dist /back/dist
 COPY --chown=1000:1000 package.json .
 RUN npm install --prod 

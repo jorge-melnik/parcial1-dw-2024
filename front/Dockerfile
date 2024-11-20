@@ -4,7 +4,7 @@ ARG JAVA_VERSION=17
 ARG ANDROID_SDK_VERSION=11076708
 ARG ANDROID_BUILD_TOOLS_VERSION=34.0.0
 ARG ANDROID_PLATFORMS_VERSION=34
-# ARG GRADLE_VERSION=8.0.2
+
 ARG ANDROID_HOME=/opt/android-sdk
 ENV ANDROID_HOME=${ANDROID_HOME}
 
@@ -24,13 +24,6 @@ RUN apt-get install -qy \
     python3 \
     openjdk-${JAVA_VERSION}-jre \
     openjdk-${JAVA_VERSION}-jdk
-
-# GRADLE
-# ENV GRADLE_HOME=/opt/gradle
-# RUN mkdir $GRADLE_HOME \
-#     && curl -sL https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-${GRADLE_VERSION}-bin.zip \
-#     && unzip -d $GRADLE_HOME gradle-${GRADLE_VERSION}-bin.zip
-# ENV PATH=$PATH:/opt/gradle/gradle-${GRADLE_VERSION}/bin
 
 # Android SDK tools
 RUN curl -sL https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_SDK_VERSION}_latest.zip \
@@ -52,15 +45,18 @@ EXPOSE 4200
 WORKDIR /front
 
 #build stage
-FROM development as build
+FROM development AS build
 COPY --chown=1000:1000 ./package*.json /front
 RUN npm install
 COPY --chown=1000:1000 . /front
+ARG FRONT_URL
+ENV FRONT_URL=${FRONT_URL}
+RUN echo FRONT_URL=${FRONT_URL}
 RUN npm run gradle
 # run gradle ya ejecuta run build
 
 # production stage
-FROM nginx:alpine as production
+FROM nginx:alpine AS production
 COPY --from=build /front/dist/front/browser /usr/share/nginx/html
 COPY --from=build /front/android/app/build/outputs/apk/debug/app-debug.apk /usr/share/nginx/html/app/app-debug.apk
 WORKDIR /usr/share/nginx/html

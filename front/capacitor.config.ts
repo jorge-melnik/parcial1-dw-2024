@@ -1,13 +1,20 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
+const frontUrl = process.env['FRONT_URL'];
+console.log({ frontUrl });
+if (!frontUrl)
+  throw Error('Tienes que especificar la variable de entorno FRONT_URL');
+
+console.log('--------------------------------------------');
+console.log({ frontUrl });
+console.log('--------------------------------------------');
 const config: CapacitorConfig = {
   appId: 'front',
   appName: 'front',
   webDir: 'dist/front/browser',
   server: {
-    // url: 'https://192.168.1.101',
     androidScheme: 'https',
-    allowNavigation: ['192.168.1.101'],
+    allowNavigation: [frontUrl],
   },
   android: {
     allowMixedContent: true, //mezclar http y https
