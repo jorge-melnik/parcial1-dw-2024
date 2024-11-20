@@ -1,10 +1,5 @@
 import { FastifyPluginAsync } from "fastify";
-import {
-  LoginSchema,
-  LoginType,
-  UsuarioSchema,
-  UsuarioType,
-} from "../../types/usuario.js";
+import { LoginSchema, LoginType, Usuario } from "../../types/usuario.js";
 import db from "../../services/db.js";
 import { Type } from "@sinclair/typebox";
 
@@ -23,7 +18,6 @@ const authRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
             "application/json": {
               schema: Type.Object({
                 token: Type.String(),
-                usuario: UsuarioSchema,
               }),
             },
           },
@@ -38,10 +32,31 @@ const authRoutes: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       );
       if (res.rowCount === 0)
         reply.unauthorized("El username o contraseña no es correcto.");
-      const usuario: UsuarioType = res.rows[0];
-
+      const usuario: Usuario = res.rows[0];
+      console.log({ usuario });
       const token = fastify.jwt.sign(usuario);
-      reply.send({ token, usuario });
+
+      reply.send({ token });
+    },
+  });
+  fastify.get("/", {
+    schema: {
+      headers: Type.Object(
+        {
+          authorization: Type.String(),
+        },
+        { additionalProperties: true }
+      ),
+      tags: ["auth"],
+      response: {
+        200: Usuario,
+      },
+    },
+    onRequest: [fastify.verifyJWT],
+    handler: async (request, reply) => {
+      const user = request.user;
+      console.log({ user });
+      return user;
     },
   });
 };

@@ -1,0 +1,67 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>
+              <input
+                type="file"
+                (change)="fileChangeEvent($event)"
+                #fileInput
+                hidden
+              />
+              <ion-button fill="none" (click)="fileInput.click()">
+                <ion-icon slot="start" name="cloud-upload-outline"></ion-icon>
+                Selecciona una imagen
+              </ion-button>
+              <ion-button fill="none" (click)="save()">
+                <ion-icon slot="start" name="save-outline"></ion-icon>
+                Guardar
+              </ion-button>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <image-cropper
+              [imageBase64]="this.imageBase64"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 3"
+              format="webp"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded($event)"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+              [resizeToWidth]="480"
+              [resizeToHeight]="360"
+              [onlyScaleDown]="true"
+              [autoCrop]="true"
+            ></image-cropper>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="auto">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Así quedará:</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img [src]="croppedImage" alt="imagen" />
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button fill="none" (click)="takePhoto()">
+          <ion-icon slot="start" name="save-outline"></ion-icon>
+          Sacar foto
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <!-- <ion-img [src]="this.foto"></ion-img> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

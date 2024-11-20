@@ -5,6 +5,7 @@ services:
     container_name: back
     build:
       context: ./back
+      target: development
     command: sh -c "npm install && npm run dev"
     volumes:
       - ./back:/back
@@ -13,11 +14,18 @@ services:
       - PGUSER=${PGUSER}
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
+      - FRONT_URL=${FRONT_URL}
   front:
-    image: nginx:alpine
+    image: front
     container_name: front
+    build:
+      context: ./front
+      target: development
+    command: sh -c "npm install && npm start"
+    environment:
+      - FRONT_URL=${FRONT_URL}
     volumes:
-      - ./front/:/usr/share/nginx/html
+      - ./front/:/front
   base:
     image: base
     container_name: base
@@ -32,10 +40,14 @@ services:
   proxy:
     image: nginx:alpine
     container_name: proxy
+    environment:
+      - FRONT_URL=${FRONT_URL}
     volumes:
       - ./proxy/myconf.template:/etc/nginx/templates/default.conf.template
+      - ./proxy/certs:/etc/nginx/certs
     ports:
       - 80:80
+      - 443:443
     depends_on:
       - front
       - back

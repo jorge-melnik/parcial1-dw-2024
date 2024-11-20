@@ -1,0 +1,9 @@
+<form (ngSubmit)="this.onClick()">
+  <input
+    name="valor"
+    type="text"
+    placeholder="Filter by nombre"
+    [(ngModel)]="this.valor"
+  />
+  <button type="submit">Buscar</button>
+</form>

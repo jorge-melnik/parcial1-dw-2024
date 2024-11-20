@@ -19,7 +19,7 @@ export const LoginSchema = Type.Object(
 );
 export type LoginType = Static<typeof LoginSchema>;
 
-export const UsuarioSchema = Type.Object(
+export const Usuario = Type.Object(
   {
     id_usuario: Type.Integer({
       description: "Identificador único del usuario",
@@ -29,6 +29,7 @@ export const UsuarioSchema = Type.Object(
     is_admin: Type.Boolean({
       description: "Indica si el usuario es administrador",
     }),
+    image_url: Type.Optional(Type.String()),
   },
   {
     additionalProperties: false,
@@ -76,5 +77,25 @@ export const NuevoUsuarioSchema = Type.Object(
   }
 );
 
-export type UsuarioType = Static<typeof UsuarioSchema>;
+export type Usuario = Static<typeof Usuario>;
 export type NuevoUsuarioType = Static<typeof NuevoUsuarioSchema>;
+
+export const ImagenUsuarioSchema = Type.Object(
+  {
+    imagen: Type.Object(
+      {
+        type: Type.Literal("file"),
+        fieldname: Type.String(),
+        filename: Type.String(),
+        encoding: Type.String(),
+        mimetype: Type.String(),
+        file: Type.Object({}), // Para manejar el FileStream
+        _buf: Type.Object({}),
+      },
+      { additionalProperties: false }
+    ),
+  },
+  { additionalProperties: false }
+);
+
+export type ImagenUsuario = Static<typeof ImagenUsuarioSchema>;

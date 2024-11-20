@@ -1,0 +1,70 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Crear usuario</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+      <ion-input
+        label="Username"
+        label-placement="stacked"
+        fill="outline"
+        formControlName="username"
+        type="text"
+        [errorText]="
+          this.usuarioForm.controls['username'].errors
+            | errorMessage: 'username'
+        "
+      ></ion-input>
+      <br />
+      <ion-input
+        label="Email"
+        label-placement="stacked"
+        fill="outline"
+        formControlName="email"
+        type="email"
+        [errorText]="
+          this.usuarioForm.controls['email'].errors | errorMessage: 'email'
+        "
+      ></ion-input>
+      <br />
+      <ion-input
+        label="Email2"
+        label-placement="stacked"
+        fill="outline"
+        formControlName="email2"
+        type="email"
+        [errorText]="
+          this.usuarioForm.controls['email2'].errors | errorMessage: 'email2'
+        "
+      ></ion-input>
+      <br />
+      <ion-input
+        label="Contraseña"
+        label-placement="stacked"
+        fill="outline"
+        formControlName="contraseña"
+        type="text"
+        [errorText]="
+          this.usuarioForm.controls['contraseña'].errors
+            | errorMessage: 'contraseña'
+        "
+      ></ion-input>
+      <br />
+      <ion-input
+        label="Repetir contraseña"
+        label-placement="stacked"
+        fill="outline"
+        formControlName="contraseña2"
+        type="text"
+        [errorText]="
+          this.usuarioForm.controls['contraseña2'].errors
+            | errorMessage: 'repetir contraseña'
+        "
+      ></ion-input>
+      <br />
+
+      <ion-button expand="full" type="submit">Submit</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>

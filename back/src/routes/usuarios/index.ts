@@ -3,7 +3,7 @@ import { Type } from "@sinclair/typebox";
 import {
   NuevoUsuarioSchema,
   NuevoUsuarioType,
-  UsuarioSchema,
+  Usuario,
 } from "../../types/usuario.js";
 import * as usuarioService from "../../services/usuarios.js";
 
@@ -33,7 +33,7 @@ const usuariosRoutes: FastifyPluginAsync = async (
           description: "Listado de usuarios. ",
           content: {
             "application/json": {
-              schema: Type.Array(UsuarioSchema),
+              schema: Type.Array(Usuario),
             },
           },
         },
@@ -56,7 +56,7 @@ const usuariosRoutes: FastifyPluginAsync = async (
           description: "Usuario creado.",
           content: {
             "application/json": {
-              schema: UsuarioSchema,
+              schema: Usuario,
             },
           },
         },
