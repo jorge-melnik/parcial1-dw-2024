@@ -49,9 +49,15 @@ FROM development AS build
 COPY --chown=1000:1000 ./package*.json /front
 RUN npm install
 COPY --chown=1000:1000 . /front
+
+#Cargo FRONT_URL desde args
 ARG FRONT_URL
 ENV FRONT_URL=${FRONT_URL}
-RUN echo FRONT_URL=${FRONT_URL}
+
+#Cargo APK_HOSTNAME desde args
+ARG APK_HOSTNAME
+ENV APK_HOSTNAME=${APK_HOSTNAME}
+
 RUN npm run gradle
 # run gradle ya ejecuta run build
 

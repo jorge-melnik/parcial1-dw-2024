@@ -51,4 +51,8 @@ export class AppComponent {
   get usuario() {
     return this._authService.usuario;
   }
+
+  recargarPagina() {
+    window.location.href = 'https://parcial.desaweb.ucu.edu.uy';
+  }
 }

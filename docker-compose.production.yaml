@@ -9,6 +9,7 @@ services:
       - PGPASSWORD=${PGPASSWORD}
       - PGHOST=${PGHOST}
       - FRONT_URL=${FRONT_URL}
+      - APK_HOSTNAME=${APK_HOSTNAME}
   front:
     image: ${REGISTRY_URL}/${NOMBRE_GRUPO}/${NOMBRE_PROYECTO}/front
     container_name: front
